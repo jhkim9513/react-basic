@@ -1,7 +1,22 @@
+* {
+  box-sizing: border-box;
+}
+
 button {
   outline: none;
   border: 0;
   cursor: pointer;
+}
+
+.navbar {
+  font-size: 2rem;
+  padding: 1em;
+  background-color: blanchedalmond;
+}
+
+.navbar-logo {
+  color: green;
+  margin-right: 0.5em;
 }
 
 .habit {
@@ -10,7 +25,8 @@ button {
   list-style: none;
 }
 
-.habit-count {
+.habit-count,
+.navbar-count {
   display: inline-block;
   text-align: center;
   font-size: 2rem;
