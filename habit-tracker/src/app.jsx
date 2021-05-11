@@ -13,20 +13,41 @@ class App extends Component {
   };
 
   handleIncrement = (habit) => {
-    // state는 직접적으로 수정하면 안좋다. 그래서 spread opreator를 사용하여 복사본을 이용한다
-    const habits = [...this.state.habits];
-    const index = habits.indexOf(habit);
-    habits[index].count++;
+    const habits = this.state.habits.map((item) => {
+      if (item.id === habit.id) {
+        return { ...habit, count: habit.count + 1 }; //habit자체를 복사하되 그 안에 있는 count만 값을 새로 지정
+      }
+      return item;
+    });
     this.setState({ habits }); //키와 벨류의 이름이 같다면 이렇게 생략이 가능하다. 원래는 habits: habits
   };
 
+  // handleIncrement = (habit) => {
+  //   // state는 직접적으로 수정하면 안좋다. 그래서 spread opreator를 사용하여 복사본을 이용한다
+  //   const habits = [...this.state.habits];
+  //   const index = habits.indexOf(habit);
+  //   habits[index].count++;
+  //   this.setState({ habits }); //키와 벨류의 이름이 같다면 이렇게 생략이 가능하다. 원래는 habits: habits
+  // };
+
   handleDecrement = (habit) => {
-    const habits = [...this.state.habits];
-    const index = habits.indexOf(habit);
-    const count = habits[index].count - 1;
-    habits[index].count = count < 0 ? 0 : count;
-    this.setState({ habits });
+    const habits = this.state.habits.map((item) => {
+      if (item.id === habit.id) {
+        const count = habit.count - 1;
+        return { ...habit, count: count < 0 ? 0 : count }; //habit자체를 복사하되 그 안에 있는 count만 값을 새로 지정
+      }
+      return item;
+    });
+    this.setState({ habits }); //키와 벨류의 이름이 같다면 이렇게 생략이 가능하다. 원래는 habits: habits
   };
+
+  // handleDecrement = (habit) => {
+  //   const habits = [...this.state.habits];
+  //   const index = habits.indexOf(habit);
+  //   const count = habits[index].count - 1;
+  //   habits[index].count = count < 0 ? 0 : count;
+  //   this.setState({ habits });
+  // };
 
   handleDelete = (habit) => {
     // 전달받은 인자인 habit의 id를 걸러낸 배열을 지역변수 habits에 담아내면 해당 요소가 삭제된 배열이 된다.
@@ -41,7 +62,9 @@ class App extends Component {
 
   handleReset = () => {
     const habits = this.state.habits.map((habit) => {
-      habit.count = 0;
+      if (habit.count !== 0) {
+        return { ...habit, count: 0 };
+      }
       return habit;
     });
     this.setState({ habits });
