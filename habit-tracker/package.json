@@ -2,7 +2,6 @@
   "name": "template",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://jhkim9513.github.io/react-basic/",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@testing-library/jest-dom": "^5.11.4",
